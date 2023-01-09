@@ -18,8 +18,6 @@ def customerMenu(uid):
         pass
     elif (choose == 5):
         pass
-    elif (choose == 6):
-        applyLoan(uid)
     else:
         print("Invalid Input! Try again..")
 

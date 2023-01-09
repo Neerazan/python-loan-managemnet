@@ -38,19 +38,17 @@ def adminLogin():
 
 # customer Login Function
 def customerLogin():
-    with open("signup.txt", "r") as fp:
-        uid = input("UserID: ")
-        password = input("Password: ")
-        while True:
-            data_db = fp.readline()
-            if(data_db == ''):
-                break
-            if (uid == data_db[0] and password == data_db[len(data_db) - 1]):
-                print("Login Successful\n")
+    uid = input("UserID: ")
+    password = input("Password: ")
+    with open('signup.txt', 'r') as fp:
+        data = fp.readlines()
+        for i in data:
+            data_list = i.split(',')
+            if (uid == data_list[0] and password == data_list[len(data_list) - 2]):
+                print("login successfully\n")
+                input("Press any key to cotinue.....\n")
                 cu.customerMenu(uid)
 
-        # print("Invalid User ID or Password please try again!!")
-        # customerLogin()
 
 # id generator
 def idGenerator():
@@ -88,7 +86,7 @@ def signUp():
         with open("signup.txt", "a") as f:
             for item in user:
                 if(item == user[len(user)-1]):
-                    f.write(item)
+                    f.write(item + ',')
                     f.write('\n')
                 else:
                     f.write(item + ',')

@@ -1,4 +1,5 @@
-1001,ff,ff,ff,ff,ff,ff,fg
-1002,rr,rr,rr,rr,rr,rr,gg
-1003,cc,cc,cc,cc,cc,cc,ff
-1004,Nirajan Dhakal,nirajan@gmail.com,9840294335,Pokhara,Male,26/09/2001,Nirajan@69
+1001,ff,ff,ff,ff,ff,ff,fg,
+1002,rr,rr,rr,rr,rr,rr,gg,
+1003,cc,cc,cc,cc,cc,cc,ff,
+1004,Nirajan Dhakal,nirajan@gmail.com,9840294335,Pokhara,Male,26/09/2001,Nirajan@69,
+1005,Naziya Hussain,nazu@gail.com,980000000000,Pokhara,Female,26-09-2004,nazu@123,
