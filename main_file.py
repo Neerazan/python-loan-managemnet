@@ -10,8 +10,10 @@ def MainMenu():
     elif (choise == 2):
         customerLogin()
     elif (choise == 3):
-        newCustomerMenu()
+        # newCustomerMenu()
+        pass
     else:
+
         print("\n\nInvalid option, Please try again!!\n\n")
         MainMenu()
 
@@ -92,4 +94,5 @@ def customerMenu():
     print("4. Loan status")
     print("5. Exit")
 
-MainMenu()
+if __name__ == '__main__':
+    MainMenu()
