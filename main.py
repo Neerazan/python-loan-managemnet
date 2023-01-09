@@ -4,7 +4,7 @@ def MainMenu():
     print("2. Customer Login\n")
     print("3. New Customer Menu\n")
 
-    choise = input("Enter your choise: ")
+    choise = int(input("Enter your choise: "))
     if (choise == 1):
         adminLogin()
     elif (choise == 2):
@@ -22,34 +22,37 @@ def adminLogin():
     pass
 
 # customer Login Function
-
 def customerLogin():
-    pass
+    with open("signup.txt", "r") as fp:
+        uid = input("UserID: ")
+        password = input("Password: ")
+        while True:
+            data_db = fp.readline().split()
+            if(data_db == []):
+                break
+            if (uid == data_db[0] and password == data_db[len(data_db) - 1]):
+                print("Login Successful\n")
+                customerMenu()
 
-# MainMenu()
+        print("Invalid User ID or Password please try again!!")
+        customerLogin()
 
 # id generator
 def idGenerator():
     with open("signup.txt","r") as f:
         a = f.read()
         if(a == ""):
-            return "1"
+            return "1001"
         else:
-            return "2"
-            # while True:
-            #     count = count + 1
-            #     line = f.readline()
-            #     uid = line[0]
-            #     if not line:
-            #         break
-            #
-            # return uid
-
-def newCustomerMenu():
-    print("1. Check Loan details.")
-    print("2. Loan calculator")
-    print("3. Sign Up")
-    print("4. Exit")
+            with open("signup.txt", "r") as fp:
+                while True:
+                    content = fp.readline()
+                    if (content == ''):
+                        break
+                    else:
+                        list_content = content.split()
+                        uid = list_content[0]
+                return int(uid) + 1
 
 
 def signUp():
@@ -70,15 +73,23 @@ def signUp():
         with open("signup.txt", "a") as f:
             for item in user:
                 if(item == user[len(user)-1]):
-                    f.write(item)
+                    f.write(item+"  ")
+                    f.write('\n')
                 else:
                     f.write(item + "  ")
-            print("Done")
+            print("\n")
+            print(f"Your user id is {uid}, Please remember it.")
 
     else:
         print("Sorry, Please enter same password, Try agin!!:\n")
         print("\n")
         signUp()
 
+def customerMenu():
+    print("1. Loan Details\n")
+    print("2. View Transaction\n")
+    print("3. Pay loan instalment\n")
+    print("4. Loan status")
+    print("5. Exit")
 
-signUp()
+MainMenu()

@@ -1,30 +1,14 @@
-# def idGenerator():
-#     with open("signup.txt", "r") as f:
-#         a = f.read()
-#         if(a == ''):
-#             print("Hello")
-#             return "1"
-#
-#         else:
-#             with open("signup.txt", "r") as f:
-#                 num = 0
-#                 print(len(f.readline()))
-#                 while num < len(f.readline()):
-#                     num+=1
-#                     line = f.readline()
-#                     uid = line[0]
-#                     print(uid)
-#                     if(line == ''):
-#                         break
-#             return str(uid)
-# idGenerator()
 
 def idGenerator():
     with open("signup.txt","r") as fp:
         while True:
             content = fp.readline()
-            list_content = content.split("  ")
-            print(list_content)
-            if not content:
+            if(content == ''):
                 break
-idGenerator()
+            else:
+                list_content = content.split("  ")
+                uid = list_content[0]
+        return int(uid) + 1
+
+c = idGenerator()
+print(c)
