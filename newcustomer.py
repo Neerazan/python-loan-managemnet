@@ -1,6 +1,7 @@
 import main_file as mf
 
 def newCustomerMenu():
+    # print(__name__)
     print("1. Check Loan details.")
     print("2. Loan calculator")
     print("3. Sign Up")
@@ -69,5 +70,5 @@ def loanCalculator():
 
     elif (option == 5):
         mf.MainMenu()
-
-newCustomerMenu()
+if __name__ == '__main__':
+    newCustomerMenu()
