@@ -1,5 +1,6 @@
 import admin as ad
 import newcustomer as ns
+import customer as cu
 def MainMenu():
     print("1. Admin Login\n")
     print("2. Customer Login\n")
@@ -11,7 +12,7 @@ def MainMenu():
     elif (choise == 2):
         customerLogin()
     elif (choise == 3):
-       ns.newCustomerMenu()
+        ns.newCustomerMenu()
     else:
 
         print("\n\nInvalid option, Please try again!!\n\n")
@@ -41,15 +42,15 @@ def customerLogin():
         uid = input("UserID: ")
         password = input("Password: ")
         while True:
-            data_db = fp.readline().split(',')
-            if(data_db == []):
+            data_db = fp.readline()
+            if(data_db == ''):
                 break
             if (uid == data_db[0] and password == data_db[len(data_db) - 1]):
                 print("Login Successful\n")
-                customerMenu()
+                cu.customerMenu(uid)
 
-        print("Invalid User ID or Password please try again!!")
-        customerLogin()
+        # print("Invalid User ID or Password please try again!!")
+        # customerLogin()
 
 # id generator
 def idGenerator():
@@ -99,12 +100,7 @@ def signUp():
         print("\n")
         signUp()
 
-def customerMenu():
-    print("1. Loan Details\n")
-    print("2. View Transaction\n")
-    print("3. Pay loan instalment\n")
-    print("4. Loan status")
-    print("5. Exit")
+
 
 def adminMenu():
     print("1. Approve New Customer")

@@ -26,6 +26,11 @@ def approveNewCustomer():
                     else:
                         print(value.ljust(20), end="")
 
-    # a = input("\nEnter customer id to approve the account: ")
+    approveCustomer()
+
+def approveCustomer():
+    print("\nApprove customer using their respective user ID\n")
+    cust_ID = input("Enter customer id ")
+
 if __name__ == '__main__':
     approveNewCustomer()
