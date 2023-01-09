@@ -41,7 +41,7 @@ def customerLogin():
         uid = input("UserID: ")
         password = input("Password: ")
         while True:
-            data_db = fp.readline().split()
+            data_db = fp.readline().split(',')
             if(data_db == []):
                 break
             if (uid == data_db[0] and password == data_db[len(data_db) - 1]):
@@ -64,7 +64,7 @@ def idGenerator():
                     if (content == ''):
                         break
                     else:
-                        list_content = content.split()
+                        list_content = content.split(',')
                         uid = list_content[0]
                 return int(uid) + 1
 
@@ -87,10 +87,10 @@ def signUp():
         with open("signup.txt", "a") as f:
             for item in user:
                 if(item == user[len(user)-1]):
-                    f.write(item+"  ")
+                    f.write(item)
                     f.write('\n')
                 else:
-                    f.write(item + "  ")
+                    f.write(item + ',')
             print("\n")
             print(f"Your user id is {uid}, Please remember it.")
 
