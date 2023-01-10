@@ -1,4 +1,4 @@
-
+import admin as ad
 # def customerLogin():
 #     with open("signup.txt", "r") as fp:
 #         uid = input("UserID: ")
@@ -15,9 +15,64 @@
 #                     print("Login Successful\n")
 #                     # cu.customerMenu(uid)
 # customerLogin()
-def customerLogin():
-    with open('signup.txt','r') as fp:
-        print(fp)
-        # for line in fp:
-        #     print(line.split(','))
-customerLogin()
+# def customerLogin():
+#     with open('loan_request.txt','r') as fp:
+#         for line in fp:
+#             print(line)
+# customerLogin()
+# import datetime
+# date = datetime.date.today().strftime('%d %b %Y')
+# print(date)
+# def generateLoanID():
+#     with open('loan_request.txt', 'r') as file:
+#         data_db = file.readlines()
+#         if(data_db == []):
+#             return 1
+#         else:
+#             return 2
+#             # for data in data_db:
+#             #     list_data = data.split(',')
+#             #     print(list_data)
+#
+# generateLoanID()
+
+# with open('loan_request.txt', 'r') as file:
+#     data_db = file.readlines()
+#     if (data_db == []):
+#         print("hell")
+#     else:
+#         value = data_db[-1].split(',')
+#         print(value[0])
+
+print("................Loan request..............\n")
+with open("loan_request.txt",'r') as fp:
+    heading = ['UID', 'LoanType', 'DATE', 'AMOUNT']
+    for i in heading:
+        if (i == heading[len(heading) - 1]):
+            print(i.center(20))
+        else:
+            print(i.center(20), end="")
+    print('\t------------------------------------------------------------------------')
+    for data_db in fp:
+        list_data = data_db.split(',')
+        for data in list_data:
+            if (data == list_data[len(list_data) - 1]):
+                print(data.center(20))
+            else:
+                print(data.center(20), end="")
+
+
+print("\nApprove Loan using respective user ID\n")
+cust_ID = input("Enter customer id: ")
+with open("loan_request.txt","r") as file:
+    for value in file:
+        ldata = value.split(',')
+        if cust_ID in ldata:
+            loanID = str(ad.generateLoanID())
+            ldata.insert(0,loanID)
+            with open('loan.txt','a') as fl:
+                for i in ldata:
+                    if(i == ldata[len(ldata) - 1]):
+                        fl.write(i)
+                    else:
+                        fl.write(i + ',')

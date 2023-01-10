@@ -1,8 +1,9 @@
 import main_file as mf
+import datetime
 def customerMenu(uid):
-    print("1. Loan Details\n")
-    print("2. View Transaction\n")
-    print("3. Pay loan instalment\n")
+    print("1. Loan Details")
+    print("2. View Transaction")
+    print("3. Pay loan instalment")
     print("4. Loan status")
     print("5. Apply for loan")
     print("6. Exit")
@@ -17,10 +18,24 @@ def customerMenu(uid):
     elif (choose == 4):
         pass
     elif (choose == 5):
-        pass
+        applyLoan(uid)
+    elif (choose == 6):
+        mf.MainMenu()
     else:
         print("Invalid Input! Try again..")
 
 def applyLoan(id):
-    print(id)
-    print("hello world")
+    loantype = input("Enter Loan type(EL/CL/HL/PL): ")
+    amount = input("Enter Loan amount: ")
+    date = datetime.date.today().strftime('%d %b %Y')
+    UID = id
+    user = [str(UID),loantype,date,amount]
+    with open('loan_request.txt','a') as file:
+        for item in user:
+            if(item == user[len(user)-1]):
+                file.write(item + ',')
+                file.write('\n')
+            else:
+                file.write(item + ',')
+        print('\n')
+        print("Your loan request has been submitted, wait for loan approval")
