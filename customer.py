@@ -1,5 +1,6 @@
 import main_file as mf
 import datetime
+import admin as ad
 def customerMenu(uid):
     print("1. Loan Details")
     print("2. View Transaction")
@@ -27,9 +28,12 @@ def customerMenu(uid):
 def applyLoan(id):
     loantype = input("Enter Loan type(EL/CL/HL/PL): ")
     amount = input("Enter Loan amount: ")
+    period = input("Time: ")
+    loanData = ad.calculateLoan(amount, loantype, period)
     date = datetime.date.today().strftime('%d %b %Y')
     UID = id
-    user = [str(UID),loantype,date,amount]
+    total_amount = int(amount)+int(loanData)
+    user = [str(UID),loantype,period,date,amount,str(loanData),str(total_amount)]
     with open('loan_request.txt','a') as file:
         for item in user:
             if(item == user[len(user)-1]):

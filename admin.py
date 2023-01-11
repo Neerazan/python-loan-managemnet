@@ -89,6 +89,24 @@ def generateLoanID():
             return int(UID)+1
 
 
-
+def calculateLoan(amount, loanType, Time):
+    if(loanType == "EL" or loanType == "el"):
+        rate = 7
+        simpleInterest = (int(amount) * int(Time) * rate)/100
+        return simpleInterest
+    elif(loanType == "CL" or loanType == "cl"):
+        rate = 11
+        simpleInterest = (int(amount) * int(Time) * rate) / 100
+        return simpleInterest
+    elif (loanType == "HL" or loanType == "hl"):
+        rate = 11
+        simpleInterest = (int(amount) * int(Time) * rate) / 100
+        return simpleInterest
+    elif (loanType == "PL" or loanType == "pl"):
+        rate = 7
+        simpleInterest = (int(amount) * int(Time) * rate) / 100
+        return simpleInterest
+    else:
+        print("Invalid Input")
 if __name__ == '__main__':
     customerDetails()
