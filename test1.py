@@ -128,3 +128,30 @@ import main_file as mf
 #                     print(data.center(20), end="")
 #
 # displaLoan()
+roll = '1004'
+num  = 0
+with open('sample.txt', 'r') as fp:
+    file = fp.readlines()
+    print(file)
+
+    for value in file:
+        num = num + 1
+        list_value = value.split(',')
+        # print(list_value)
+        if(roll in list_value):
+            newTotalAmount = int(list_value[-2]) - 5120000
+            updateMonth = int(list_value[3]) - 1
+            if(updateMonth == 0 or newTotalAmount == 0):
+                print("Congratulations, You have paid all the loan...")
+                input("Press any key to continue.....")
+                del file[num-1]
+                with open('sample.txt', 'w') as f:
+                    f.writelines(file)
+            list_value[3] = str(updateMonth)
+            list_value[-2] = str(newTotalAmount)
+            string_value = ','.join([str(elem) for elem in list_value])
+            print(string_value)
+            print(num)
+            file[num - 1] = string_value
+            with open('sample.txt','w') as fn:
+                fn.writelines(file)

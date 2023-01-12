@@ -3,3 +3,5 @@
 1003,cc,cc,cc,cc,cc,cc,ff,
 1004,Nirajan Dhakal,nirajan@gmail.com,9840294335,Pokhara,Male,26/09/2001,Nirajan@69,
 1005,Naziya Hussain,nazu@gail.com,980000000000,Pokhara,Female,26-09-2004,nazu@123,
+1006,Basu Thapa,basu@gmail.com,9800000000,Pokhara,Male,2001-09-26,basu@123,
+1007,Basu Thapa,basu@gmail.com,9800000000,Pokhara,Male,2001-09-26,basu@123,

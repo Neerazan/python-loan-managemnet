@@ -11,25 +11,7 @@ def customerMenu(uid):
 
     choose = int(input("Choose option: "))
     if(choose == 1):
-        with open('loan.txt', 'r') as fp:
-            for value in fp:
-                list_value = value.split(',')
-                if uid in list_value:
-                    heading = ['LOAN ID', 'USER ID', 'LOAN TYPE', 'PERIOD', 'DATE', 'AMOUNT', 'TOTAL AMOUNT', 'MONTHLY EMI', 'REMAINING AMOUNT']
-                    for i in heading:
-                        if (i == heading[len(heading) - 1]):
-                            print(i.center(20))
-                            print('\t-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------')
-                        else:
-                            print(i.center(20), end="")
-
-                    for data in list_value:
-                        if(data == list_value[len(list_value)-1]):
-                            print(data)
-                            return
-                        else:
-                            print(data.center(20), end="")
-            print("Sorry, You haven't any loan details until now")
+        customerLoanDetails(uid)
     elif(choose == 2):
         pass
     elif (choose == 3):
@@ -60,4 +42,50 @@ def applyLoan(id):
             else:
                 file.write(item + ',')
         print('\n')
-        print("Your loan request has been submitted, wait for loan approval")
+        print("Your loan request has been submitted, wait for approval")
+
+def transaction(uid):
+    print("/t/t/t/t/t/tYOUR LOAN DETAILS")
+    print("\n")
+    customerLoanDetails(uid)
+    print("\n")
+    print("/t/t/t/t/tMAKE PAYMENT")
+
+    payment = int(input("AMOUNT: "))
+    with open('loan.txt', 'r') as fp:
+        for value in fp:
+            list_value = value.split(',')
+            if uid in list_value:
+                if(payment < list_value[-3]):
+                    print(f"You have yo pay minimum of {list_value[-3]}.")
+                elif(payment>list_value[-2]):
+                    print(f"You have to pay only {list_value[-2]}")
+                elif(payment<list_value[-2] or payment>list_value[-2]):
+                    pass
+                else:
+                    print("Invalid Input, Try again....")
+
+
+
+def customerLoanDetails(uid):
+    with open('loan.txt', 'r') as fp:
+        for value in fp:
+            list_value = value.split(',')
+            if uid in list_value:
+                heading = ['LOAN ID', 'USER ID', 'LOAN TYPE', 'PERIOD', 'DATE', 'AMOUNT', 'TOTAL AMOUNT', 'MONTHLY EMI',
+                           'REMAINING AMOUNT']
+                for i in heading:
+                    if (i == heading[len(heading) - 1]):
+                        print(i.center(20))
+                        print(
+                            '\t-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------')
+                    else:
+                        print(i.center(20), end="")
+
+                for data in list_value:
+                    if (data == list_value[len(list_value) - 1]):
+                        print(data)
+                        return
+                    else:
+                        print(data.center(20), end="")
+        print("Sorry, You haven't any loan details until now")

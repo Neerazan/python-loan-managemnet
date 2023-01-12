@@ -93,6 +93,7 @@ def signUp():
                 else:
                     f.write(item + ',')
             print("\n")
+            print("Successfully Registered.....")
             print(f"Your user id is {uid}, Please remember it.")
 
     else:
