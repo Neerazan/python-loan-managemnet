@@ -48,7 +48,9 @@ def customerLogin():
                 print("login successfully\n")
                 input("Press any key to cotinue.....\n")
                 cu.customerMenu(uid)
-
+                return
+        print("Wrong ID or Password! Try again..")
+        customerLogin()
 
 # id generator
 def idGenerator():

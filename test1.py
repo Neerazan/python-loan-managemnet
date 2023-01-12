@@ -1,4 +1,6 @@
 import admin as ad
+import customer as cu
+import main_file as mf
 # def customerLogin():
 #     with open("signup.txt", "r") as fp:
 #         uid = input("UserID: ")
@@ -91,3 +93,18 @@ import admin as ad
 #                     for line in lines:
 #                         file.write(line)
 # displaLoanRequest()
+
+def customerLogin():
+    uid = input("UserID: ")
+    password = input("Password: ")
+    with open('signup.txt', 'r') as fp:
+        data = fp.readlines()
+        for i in data:
+            data_list = i.split(',')
+            if (uid == data_list[0] and password == data_list[len(data_list) - 2]):
+                print("login successfully\n")
+                input("Press any key to continue.....\n")
+                cu.customerMenu(uid)
+                return
+        print("invalid usrID or password! try again")
+        customerLogin()

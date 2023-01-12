@@ -55,8 +55,14 @@ def acceptLoan():
         for value in file:
             ldata = value.split(',')
             if cust_ID in ldata:
+                loanType = ldata[1]
+                amount = ldata[len(ldata) - 1]
+                period = ldata[2]
+                loanData = calculateLoan(amount, loanType, period)
+                totalPayableAmont = int(amount) + int(loanData)
                 loanID = str(generateLoanID())
                 ldata.insert(0,loanID)
+                ldata.append(loanData,totalPayableAmont)
                 with open('loan.txt','a') as fl:
                     for i in ldata:
                         if(i == ldata[len(ldata) - 1]):

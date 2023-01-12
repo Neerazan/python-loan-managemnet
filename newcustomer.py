@@ -43,14 +43,14 @@ def loanCalculator():
         principal = int(input("\t\t\t\tPrincipal: "))
         rate = int(7)
         time = int(input("\t\t\t\tTime(in month): "))
-        simple_interes = (principal * time * rate) / 100
+        simple_interes = (principal * (time/12) * rate) / 100
         print("\t\t\t\tinterest = ", simple_interes)
 
     elif (option == 2):
         principal = int(input("\t\t\t\tPrincipal: "))
         rate = int(11)
         time = int(input("\t\t\t\tTime(in month): "))
-        simple_interes = (principal * time * rate) / 100
+        simple_interes = (principal * (time/12) * rate) / 100
         print("\t\t\t\tinterest = ", simple_interes)
 
 
@@ -58,14 +58,14 @@ def loanCalculator():
         principal = int(input("\t\t\t\tPrincipal: "))
         rate = int(11)
         time = int(input("\t\t\t\tTime(in month): "))
-        simple_interes = (principal * time * rate) / 100
+        simple_interes = (principal * (time/12) * rate) / 100
         print("\t\t\t\tinterest = ", simple_interes)
 
     elif (option == 4):
         principal = int(input("\t\t\t\tPrincipal: "))
         rate = int(7)
         time = int(input("\t\t\t\tTime(in month): "))
-        simple_interes = (principal * time * rate) / 100
+        simple_interes = (principal * (time/12) * rate) / 100
         print("\t\t\t\tinterest = ", simple_interes)
 
     elif (option == 5):
