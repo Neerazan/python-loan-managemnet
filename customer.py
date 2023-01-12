@@ -11,7 +11,25 @@ def customerMenu(uid):
 
     choose = int(input("Choose option: "))
     if(choose == 1):
-        pass
+        with open('loan.txt', 'r') as fp:
+            for value in fp:
+                list_value = value.split(',')
+                if uid in list_value:
+                    heading = ['LOAN ID', 'USER ID', 'LOAN TYPE', 'PERIOD', 'DATE', 'AMOUNT', 'TOTAL AMOUNT', 'MONTHLY EMI', 'REMAINING AMOUNT']
+                    for i in heading:
+                        if (i == heading[len(heading) - 1]):
+                            print(i.center(20))
+                            print('\t-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------')
+                        else:
+                            print(i.center(20), end="")
+
+                    for data in list_value:
+                        if(data == list_value[len(list_value)-1]):
+                            print(data)
+                            return
+                        else:
+                            print(data.center(20), end="")
+            print("Sorry, You haven't any loan details until now")
     elif(choose == 2):
         pass
     elif (choose == 3):
@@ -28,7 +46,7 @@ def customerMenu(uid):
 def applyLoan(id):
     loantype = input("Enter Loan type(EL/CL/HL/PL): ")
     amount = input("Enter Loan amount: ")
-    period = input("Time: ")
+    period = input("Time(In months): ")
     # loanData = ad.calculateLoan(amount, loantype, period)
     date = datetime.date.today().strftime('%d %b %Y')
     UID = id

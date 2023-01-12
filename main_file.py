@@ -103,18 +103,17 @@ def signUp():
 
 
 def adminMenu():
-    print("1. Approve New Customer")
-    print("2. Approve Loan")
-    print("3. Transaction of specific customer")
-    print("4. Transaction of Loan type")
-    print("5. View all transaction of all customer")
-    print("6. Transation of all type loan")
-    print("7. Exit")
+    print("1. Approve Loan")
+    print("2. Transaction of specific customer")
+    print("3. Transaction of Loan type")
+    print("4. View all transaction of all customer")
+    print("5. Transaction of all type loan")
+    print("6. Exit")
 
     choose = int(input("Choose option: "))
 
     if(choose == 1):
-        adminLogin()
+        ad.displaLoanRequest()
     elif (choose == 2):
         pass
     elif (choose == 3):

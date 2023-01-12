@@ -28,15 +28,15 @@ def customerDetails():
 
 
 def displaLoanRequest():
-    print("................Loan request..............\n")
+    print("    .......................................Loan request........................................\n")
     with open("loan_request.txt",'r') as fp:
-        heading = ['UID', 'LoanType', 'DATE', 'AMOUNT']
+        heading = ['UID', 'LOAN TYPE', 'PERIOD', 'DATE', 'AMOUNT']
         for i in heading:
             if (i == heading[len(heading) - 1]):
                 print(i.center(20))
             else:
                 print(i.center(20), end="")
-        print('\t------------------------------------------------------------------------')
+        print('\t-------------------------------------------------------------------------------------------')
         for data_db in fp:
             list_data = data_db.split(',')
             for data in list_data:
@@ -56,14 +56,18 @@ def acceptLoan():
             ldata = value.split(',')
             if cust_ID in ldata:
                 loanType = ldata[1]
-                amount = ldata[len(ldata) - 1]
+                amount = ldata[len(ldata) - 2]
                 period = ldata[2]
                 loanData = calculateLoan(amount, loanType, period)
                 totalPayableAmont = int(amount) + int(loanData)
+                monthlyEmi = int(int(totalPayableAmont)/int(period))
+                remainingAmount = totalPayableAmont
                 loanID = str(generateLoanID())
-                ldata.insert(0,loanID)
-                ldata.append(loanData,totalPayableAmont)
-                with open('loan.txt','a') as fl:
+                ldata.insert(0, loanID)
+                ldata.insert(6, str(totalPayableAmont))
+                ldata.insert(7, str(monthlyEmi))
+                ldata.insert(8, str(remainingAmount))
+                with open('loan.txt', 'a') as fl:
                     for i in ldata:
                         if(i == ldata[len(ldata) - 1]):
                             fl.write(i)
@@ -98,21 +102,43 @@ def generateLoanID():
 def calculateLoan(amount, loanType, Time):
     if(loanType == "EL" or loanType == "el"):
         rate = 7
-        simpleInterest = (int(amount) * int(Time) * rate)/100
-        return simpleInterest
+        simpleInterest = (int(amount) * (int(Time)/12) * rate)/100
+        return int(simpleInterest)
     elif(loanType == "CL" or loanType == "cl"):
         rate = 11
-        simpleInterest = (int(amount) * int(Time) * rate) / 100
-        return simpleInterest
+        simpleInterest = (int(amount) * (int(Time)/12) * rate) / 100
+        return int(simpleInterest)
     elif (loanType == "HL" or loanType == "hl"):
         rate = 11
-        simpleInterest = (int(amount) * int(Time) * rate) / 100
-        return simpleInterest
+        simpleInterest = (int(amount) * (int(Time)/12) * rate) / 100
+        return int(simpleInterest)
     elif (loanType == "PL" or loanType == "pl"):
         rate = 7
-        simpleInterest = (int(amount) * int(Time) * rate) / 100
-        return simpleInterest
+        simpleInterest = (int(amount) * (int(Time)/12) * rate) / 100
+        return int(simpleInterest)
     else:
         print("Invalid Input")
+
+
+
+#display loan details
+def displaLoan():
+    print("    ......................................................................Loan Details.......................................................................\n")
+    with open("loan.txt",'r') as fp:
+        heading = ['LOAN ID', 'USER ID', 'LOAN TYPE', 'PERIOD', 'DATE', 'AMOUNT', 'TOTAL AMOUNT', 'MONTLY EMI', 'REMAINING AMOUNT']
+        for i in heading:
+            if (i == heading[len(heading) - 1]):
+                print(i.center(20))
+            else:
+                print(i.center(20), end="")
+        print('\t---------------------------------------------------------------------------------------------------------------------------------------------------------')
+        for data_db in fp:
+            list_data = data_db.split(',')
+            for data in list_data:
+                if (data == list_data[len(list_data) - 1]):
+                    print(data.center(20))
+                else:
+                    print(data.center(20), end="")
+
 if __name__ == '__main__':
     customerDetails()

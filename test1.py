@@ -94,17 +94,37 @@ import main_file as mf
 #                         file.write(line)
 # displaLoanRequest()
 
-def customerLogin():
-    uid = input("UserID: ")
-    password = input("Password: ")
-    with open('signup.txt', 'r') as fp:
-        data = fp.readlines()
-        for i in data:
-            data_list = i.split(',')
-            if (uid == data_list[0] and password == data_list[len(data_list) - 2]):
-                print("login successfully\n")
-                input("Press any key to continue.....\n")
-                cu.customerMenu(uid)
-                return
-        print("invalid usrID or password! try again")
-        customerLogin()
+# def customerLogin():
+#     uid = input("UserID: ")
+#     password = input("Password: ")
+#     with open('signup.txt', 'r') as fp:
+#         data = fp.readlines()
+#         for i in data:
+#             data_list = i.split(',')
+#             if (uid == data_list[0] and password == data_list[len(data_list) - 2]):
+#                 print("login successfully\n")
+#                 input("Press any key to continue.....\n")
+#                 cu.customerMenu(uid)
+#                 return
+#         print("invalid usrID or password! try again")
+#         customerLogin()
+
+# def displaLoan():
+#     print("    ......................................................................Loan Details.......................................................................\n")
+#     with open("loan.txt",'r') as fp:
+#         heading = ['LOAN ID', 'USER ID', 'LOAN TYPE', 'PERIOD', 'DATE', 'AMOUNT', 'TOTAL AMOUNT', 'MONTHLY EMI']
+#         for i in heading:
+#             if (i == heading[len(heading) - 1]):
+#                 print(i.center(20))
+#             else:
+#                 print(i.center(20), end="")
+#         print('\t---------------------------------------------------------------------------------------------------------------------------------------------------------')
+#         for data_db in fp:
+#             list_data = data_db.split(',')
+#             for data in list_data:
+#                 if (data == list_data[len(list_data) - 1]):
+#                     print(data.center(20))
+#                 else:
+#                     print(data.center(20), end="")
+#
+# displaLoan()
