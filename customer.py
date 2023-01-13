@@ -53,6 +53,7 @@ def transaction(uid):
     makeTransaction(uid)
 
 def makeTransaction(uid):
+
     customerLoanDetails(uid)
     payment = int(input("AMOUNT: "))
     with open('sample.txt', 'r') as fp:
@@ -65,13 +66,11 @@ def makeTransaction(uid):
                 elif (payment > int(list_value[-2])):
                     print(f"You have to pay only {list_value[-2]}")
                     makeTransaction(uid)
-                elif (payment < int(list_value[-2]) or payment > int(list_value[-2])):
+                elif (payment <= int(list_value[-2])):
                     updateAmount(uid, payment)
-                    return
                 else:
                     print("Invalid Input, Try again....")
                     makeTransaction(uid)
-
 
 
 def updateAmount(uid, payment):
@@ -150,3 +149,5 @@ def customerLoanDetails(uid):
                     else:
                         print(data.center(20), end="")
         print("Sorry, You haven't any loan details until now")
+        input("Press any key to go to Menu...")
+        customerMenu(uid)
