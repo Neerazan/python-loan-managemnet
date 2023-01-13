@@ -61,8 +61,10 @@ def makeTransaction(uid):
             if uid in list_value:
                 if (payment < int(list_value[-3]) and int(list_value[-2]) > payment):
                     print(f"You have yo pay minimum of {list_value[-3]}.")
+                    makeTransaction(uid)
                 elif (payment > int(list_value[-2])):
                     print(f"You have to pay only {list_value[-2]}")
+                    makeTransaction(uid)
                 elif (payment < int(list_value[-2]) or payment > int(list_value[-2])):
                     updateAmount(uid, payment)
                     return
