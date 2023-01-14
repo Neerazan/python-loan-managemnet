@@ -120,7 +120,7 @@ def adminMenu():
     elif (choose == 3):
         pass
     elif (choose == 4):
-        pass
+        ad.all_transaction()
     elif (choose == 5):
         pass
     elif (choose == 6):

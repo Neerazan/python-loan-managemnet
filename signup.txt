@@ -5,3 +5,4 @@
 1005,Naziya Hussain,nazu@gail.com,980000000000,Pokhara,Female,26-09-2004,nazu@123,
 1006,Basu Thapa,basu@gmail.com,9800000000,Pokhara,Male,2001-09-26,basu@123,
 1007,Basu Thapa,basu@gmail.com,9800000000,Pokhara,Male,2001-09-26,basu@123,
+1008,Shiva Dhakal,shiva@gmail.com,9846613368,Tanahun,Male,2001-02-12,shiva@123,

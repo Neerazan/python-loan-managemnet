@@ -101,7 +101,7 @@ def generateLoanID():
 
 def calculateLoan(amount, loanType, Time):
     if(loanType == "EL" or loanType == "el"):
-        rate = 7
+        rate = 15
         simpleInterest = (int(amount) * (int(Time)/12) * rate)/100
         return int(simpleInterest)
     elif(loanType == "CL" or loanType == "cl"):
@@ -139,6 +139,25 @@ def displaLoan():
                     print(data.center(20))
                 else:
                     print(data.center(20), end="")
+
+def all_transaction():
+    with open('transaction.txt', 'r') as fp:
+        heading = ['TRANSACTION ID', 'LOAN ID', 'USER ID', 'LOAN TYPE', 'DATE AND TIME', 'PAYMENT', 'REMAINING AMOUNT']
+
+        for i in heading:
+            if i == heading[len(heading) - 1]:
+                print(i.center(20))
+                print('---------------------------------------------------------------------------------------------------------------------------------------------')
+            else:
+                print(i.center(20), end="")
+
+        for data in fp:
+            list_data = data.split(',')
+            for value in list_data:
+                if(value == list_data[len(list_data)-1]):
+                    print(value)
+                else:
+                    print(value.center(20), end="")
 
 if __name__ == '__main__':
     customerDetails()

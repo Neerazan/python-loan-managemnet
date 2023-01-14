@@ -1,6 +1,6 @@
 import main_file as mf
 from datetime import datetime
-import admin as ad
+# import admin as ad
 def customerMenu(uid):
     print("1. Loan Details")
     print("2. View Transaction")
@@ -30,7 +30,7 @@ def applyLoan(id):
     amount = input("Enter Loan amount: ")
     period = input("Time(In months): ")
     # loanData = ad.calculateLoan(amount, loantype, period)
-    date = datetime.date.today().strftime('%d %b %Y')
+    date = datetime.today().strftime('%d %b %Y')
     UID = id
     # total_amount = int(amount)+int(loanData)
     user = [str(UID),loantype,period,date,amount]
@@ -56,7 +56,7 @@ def makeTransaction(uid):
 
     customerLoanDetails(uid)
     payment = int(input("AMOUNT: "))
-    with open('sample.txt', 'r') as fp:
+    with open('loan.txt', 'r') as fp:
         for value in fp:
             list_value = value.split(',')
             if uid in list_value:
@@ -74,11 +74,8 @@ def makeTransaction(uid):
 
 
 def updateAmount(uid, payment):
-    with open('sample.txt', 'r') as fp:
+    with open('loan.txt', 'r') as fp:
         file = fp.readlines()
-        print(file)
-        print("I'm in updateamount")
-        print(uid)
         num = 0
         for value in file:
             num = num + 1
@@ -91,7 +88,7 @@ def updateAmount(uid, payment):
                     print("Congratulations, You have paid all the loan...")
                     input("Press any key to continue.....")
                     del file[num - 1]
-                    with open('sample.txt', 'w') as f:
+                    with open('loan.txt', 'w') as f:
                         f.writelines(file)
                         storeTransaction(list_value, str(newTotalAmount), str(payment))
                         return
@@ -101,7 +98,7 @@ def updateAmount(uid, payment):
                 # print(string_value)
                 # print(num)
                 file[num - 1] = string_value
-                with open('sample.txt', 'w') as fn:
+                with open('loan.txt', 'w') as fn:
                     fn.writelines(file)
                     storeTransaction(list_value, str(newTotalAmount), str(payment))
                     return
@@ -128,7 +125,7 @@ def storeTransaction(listData, amount, payment):
                 fp.write(value + ',')
 
 def customerLoanDetails(uid):
-    with open('sample.txt', 'r') as fp:
+    with open('loan.txt', 'r') as fp:
         for value in fp:
             list_value = value.split(',')
             if uid in list_value:
