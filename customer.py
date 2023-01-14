@@ -13,7 +13,7 @@ def customerMenu(uid):
     if(choose == 1):
         customerLoanDetails(uid)
     elif(choose == 2):
-        pass
+        show_transaction(uid)
     elif (choose == 3):
         makeTransaction(uid)
     elif (choose == 4):
@@ -137,8 +137,7 @@ def customerLoanDetails(uid):
                 for i in heading:
                     if (i == heading[len(heading) - 1]):
                         print(i.center(20))
-                        print(
-                            '\t-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------')
+                        print('\t-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------')
                     else:
                         print(i.center(20), end="")
 
@@ -151,3 +150,23 @@ def customerLoanDetails(uid):
         print("Sorry, You haven't any loan details until now")
         input("Press any key to go to Menu...")
         customerMenu(uid)
+
+def show_transaction(uid):
+    with open('transaction.txt', 'r') as fp:
+        heading = ['TRANSACTION ID', 'LOAN ID', 'USER ID', 'LOAN TYPE', 'DATE AND TIME', 'PAYMENT', 'REMAINING AMOUNT']
+
+        for i in heading:
+            if i == heading[len(heading) - 1]:
+                print(i.center(20))
+                print('---------------------------------------------------------------------------------------------------------------------------------------------')
+            else:
+                print(i.center(20), end="")
+
+        for data in fp:
+            list_data = data.split(',')
+            if uid in list_data:
+                for value in list_data:
+                    if(value == list_data[len(list_data)-1]):
+                        print(value)
+                    else:
+                        print(value.center(20), end="")
