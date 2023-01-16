@@ -1,45 +1,45 @@
-import main_file as mf
-# import customer as cu
-def show_transaction(uid):
-    heading = ['TRANSACTION ID', 'LOAN ID', 'USER ID', 'LOAN TYPE', 'DATE AND TIME', 'PAYMENT', 'REMAINING AMOUNT']
-    for i in heading:
-        if i == heading[len(heading) - 1]:
-            print(i.center(20))
-            print('---------------------------------------------------------------------------------------------------------------------------------------------')
-        else:
-            print(i.center(20), end="")
-
-    if uid == 'ALL' or uid == 'all':
-        with open('transaction.txt', 'r') as file:
-            for data in file:
-                list_data = data.split(',')
-                for value in list_data:
-                    if (value == list_data[len(list_data) - 1]):
-                        print(value)
+import main_file
+def testfunc():
+    uid = 'PL'
+    with open('transaction.txt', 'r') as file:
+        file_data = file.readlines()
+        line_number = len(file_data)
+        count = 0
+        new_list = []
+        for data in file_data:
+            count = count + 1
+            list_data = data.split(',')
+            if uid in list_data:
+               new_list.append(list_data)
+            if count == line_number and new_list != []:
+                heading = ['TRANSACTION ID', 'LOAN ID', 'USER ID', 'LOAN TYPE', 'DATE AND TIME', 'PAYMENT',
+                           'REMAINING AMOUNT']
+                for i in heading:
+                    if i == heading[len(heading) - 1]:
+                        print(i.center(20))
+                        print(
+                            '---------------------------------------------------------------------------------------------------------------------------------------------')
                     else:
-                        print(value.center(20), end="")
-    else:
-        with open('transaction.txt','r') as fp:
-            for data in fp:
-                list_data = data.split(',')
-                if uid in list_data:
-                    for value in list_data:
-                        if(value == list_data[len(list_data)-1]):
-                            print(value)
+                        print(i.center(20), end="")
+
+                for value in new_list:
+                    for new_data in value:
+                        if (new_data == value[len(value) - 1]):
+                            print(new_data)
+
                         else:
-                            print(value.center(20), end="")
+                            print(new_data.center(20), end="")
 
-                else:
-                    with open('loan.txt', 'r') as fn:
-                        for num in fn:
-                            new_data = num.split(',')
-                            if uid in new_data:
-                                print('This customer have not made any transaction..')
-                                input("Press any ket to continue......")
-                                mf.adminMenu()
-                                return
-                        print('Wrong Input!, Try again...')
 
-                        return
-    mf.adminMenu()
-show_transaction('EL')
+            if line_number == count and new_list == []:
+                with open('loan.txt', 'r') as fl:
+                    for data1 in fl:
+                        list_data1 = data1.split(',')
+                        loan_type = ['EL', 'HL', 'PL', 'CL']
+                        if uid in list_data1 or uid in loan_type:
+                            print("No transaction")
+                            input("press any key to continue.....")
+                            return main_file.adminMenu()
+                    print("wrong input")
+
+testfunc()

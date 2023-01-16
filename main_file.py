@@ -105,27 +105,19 @@ def signUp():
 
 def adminMenu():
     print("1. Approve Loan")
-    print("2. Transaction of specific customer")
-    print("3. Transaction of Loan type")
-    print("4. View all transaction of all customer")
-    print("5. Transaction of all type loan")
-    print("6. Exit")
+    print("2. All transaction")
+    print("3. Search Transaction")
+    print("5. Exit")
 
     choose = int(input("Choose option: "))
 
-    if(choose == 1):
+    if choose == 1:
         ad.displaLoanRequest()
-    elif (choose == 2):
-        pass
-    elif (choose == 3):
-        pass
-    elif (choose == 4):
-        ad.all_transaction()
-    elif (choose == 5):
-        pass
-    elif (choose == 6):
-        pass
-    elif (choose == 7):
+    elif choose == 2:
+        ad.show_all_transaction()
+    elif choose == 3:
+        ad.customer_transaction()
+    elif choose == 4:
         MainMenu()
     else:
         print("Wrong input! Try again..")
