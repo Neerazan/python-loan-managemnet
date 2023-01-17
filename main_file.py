@@ -48,24 +48,32 @@ def adminLogin():
         adminMenu()
         pass
     else:
-        print("Invalid Input! Try again...\n")
+        print("\tInvalid Input! Try again...\n")
+        input("\tPress any key to continue")
         adminLogin()
 
 
 # customer Login Function
 def customerLogin():
-    uid = input("UserID: ")
-    password = input("Password: ")
+    print("\n")
+    print("\t------------------------")
+    print("\t||   CUSTOMER LOGIN   ||")
+    print("\t------------------------\n")
+    uid = input("\tUserID: ")
+    password = input("\tPassword: ")
     with open('signup.txt', 'r') as fp:
         data = fp.readlines()
         for i in data:
             data_list = i.split(',')
             if (uid == data_list[0] and password == data_list[len(data_list) - 2]):
                 print("\n\tlogin successfully\n")
-                input("Press any key to continue.....\n")
+                input("\tPress any key to continue.....\n")
+                clear()
                 cu.customerMenu(uid)
                 return
-        print("Wrong ID or Password! Try again..")
+        print("\n\tWrong ID or Password! Try again")
+        input("\tPress any key to continue..")
+        clear()
         customerLogin()
 
 # id generator
@@ -136,7 +144,7 @@ def adminMenu():
     print("\t3. Search Transaction")
     print("\t4. Exit\n")
 
-    choose = int(input("\t3Choose option: "))
+    choose = int(input("\tChoose option: "))
     clear()
 
     if choose == 1:

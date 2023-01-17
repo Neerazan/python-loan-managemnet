@@ -2,38 +2,50 @@ import main_file as mf
 from datetime import datetime
 # import admin as ad
 def customerMenu(uid):
-    print("1. Loan Details")
-    print("2. View Transaction")
-    print("3. Pay loan instalment")
-    print("4. Loan status")
-    print("5. Apply for loan")
-    print("6. Exit")
+    print("\n")
+    print("\t-----------------------")
+    print("\t||   CUSTOMER MENU   ||")
+    print("\t-----------------------\n")
+    print("\t1. Loan Details")
+    print("\t2. View Transaction")
+    print("\t3. Pay loan instalment")
+    print("\t4. Apply for loan")
+    print("\t5. Exit")
 
-    choose = int(input("Choose option: "))
+    choose = int(input("\n\tChoose option: "))
     if(choose == 1):
+        mf.clear()
         customerLoanDetails(uid)
     elif(choose == 2):
+        mf.clear()
         show_transaction(uid)
     elif (choose == 3):
+        mf.clear()
         makeTransaction(uid)
     elif (choose == 4):
-        customerLoanDetails(uid)
-    elif (choose == 5):
+        mf.clear()
         applyLoan(uid)
-    elif (choose == 6):
+    elif (choose == 5):
+        mf.clear()
         mf.MainMenu()
     else:
-        print("Invalid Input! Try again..")
+        print("\tInvalid Input! Try again..")
+        input("\n\tPress any key to continue..")
+        mf.clear()
+        customerMenu(uid)
 
 def applyLoan(id):
-    loantype = input("Enter Loan type(EL/CL/HL/PL): ")
-    amount = input("Enter Loan amount: ")
-    period = input("Time(In months): ")
+    print("\n")
+    print("\t--------------------")
+    print("\t||   APPLY LOAN   ||")
+    print("\t--------------------\n")
+    loantype = input("\tEnter Loan type(EL/CL/HL/PL): ")
+    amount = input("\tEnter Loan amount: ")
+    period = input("\tTime(In months): ")
     # loanData = ad.calculateLoan(amount, loantype, period)
     date = datetime.today().strftime('%d %b %Y')
-    UID = id
     # total_amount = int(amount)+int(loanData)
-    user = [str(UID),loantype,period,date,amount]
+    user = [str(id),loantype,period,date,amount]
     with open('loan_request.txt','a') as file:
         for item in user:
             if(item == user[len(user)-1]):
@@ -42,34 +54,38 @@ def applyLoan(id):
             else:
                 file.write(item + ',')
         print('\n')
-        print("Your loan request has been submitted, wait for approval")
+        print("\tYour loan request has been submitted, wait for approval")
+        input("\n\tPress Enter to continue..")
+        customerMenu(id)
 
-def transaction(uid):
-    print("/t/t/t/t/t/tYOUR LOAN DETAILS")
-    print("\n")
-    customerLoanDetails(uid)
-    print("\n")
-    print("/t/t/t/t/tMAKE PAYMENT")
-    makeTransaction(uid)
+
 
 def makeTransaction(uid):
-
-    customerLoanDetails(uid)
-    payment = int(input("AMOUNT: "))
+    print("\n")
+    print("\t----------------------")
+    print("\t||   MAKE PAYMENT   ||")
+    print("\t----------------------\n")
+    payment = int(input("\tAMOUNT: "))
     with open('loan.txt', 'r') as fp:
         for value in fp:
             list_value = value.split(',')
             if uid in list_value:
                 if (payment < int(list_value[-3]) and int(list_value[-2]) > payment):
-                    print(f"You have yo pay minimum of {list_value[-3]}.")
+                    print(f"\tYou have yo pay minimum of {list_value[-3]}.")
+                    input("\n\tPress Enter to continue..")
+                    mf.clear()
                     makeTransaction(uid)
                 elif (payment > int(list_value[-2])):
-                    print(f"You have to pay only {list_value[-2]}")
+                    print(f"\tYou have to pay only {list_value[-2]}")
+                    input("\n\tPress Enter to continue..")
+                    mf.clear()
                     makeTransaction(uid)
                 elif (payment <= int(list_value[-2])):
                     updateAmount(uid, payment)
                 else:
-                    print("Invalid Input, Try again....")
+                    print("\tInvalid Input, Try again....")
+                    input("\n\tPress Enter to continue..")
+                    mf.clear()
                     makeTransaction(uid)
 
 
@@ -85,8 +101,8 @@ def updateAmount(uid, payment):
                 newTotalAmount = int(list_value[-2]) - payment
                 updateMonth = int(list_value[3]) - 1
                 if ((updateMonth == 0 and newTotalAmount == 0) or newTotalAmount == 0):
-                    print("Congratulations, You have paid all the loan...")
-                    input("Press any key to continue.....")
+                    print("\n\tCongratulations, You have paid all the loan...")
+                    input("\tPress any key to continue.....")
                     del file[num - 1]
                     with open('loan.txt', 'w') as f:
                         f.writelines(file)
@@ -125,45 +141,82 @@ def storeTransaction(listData, amount, payment):
                 fp.write(value + ',')
 
 def customerLoanDetails(uid):
+    print('\n')
+    print("\t\t\t\t\t\t\t\t\t\t----------------------")
+    print("\t\t\t\t\t\t\t\t\t\t||   LOAN DETAILS   ||")
+    print("\t\t\t\t\t\t\t\t\t\t----------------------\n\n")
     with open('loan.txt', 'r') as fp:
-        for value in fp:
-            list_value = value.split(',')
-            if uid in list_value:
-                heading = ['LOAN ID', 'USER ID', 'LOAN TYPE', 'PERIOD', 'DATE', 'AMOUNT', 'TOTAL AMOUNT', 'MONTHLY EMI',
+        file_data = fp.readlines()
+        line_number = len(file_data)
+        count = 0
+        new_list = []
+        for data in file_data:
+            count = count + 1
+            list_data = data.split(',')
+            if uid in list_data:
+                new_list.append(list_data)
+            if count == line_number and new_list != []:
+                heading = ['LOAN ID', 'USER ID', 'LOAN TYPE', 'PERIOD', 'DATE', 'AMOUNT', 'TOTAL AMOUNT', 'MONTHLY EMI', 'REMAINING AMOUNT']
+                for i in heading:
+                    if i == heading[len(heading) - 1]:
+                        print(i.center(20))
+                        print('    -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------')
+                    else:
+                        print(i.center(20), end="")
+                for value in new_list:
+                    for new_data in value:
+                        if new_data == value[len(value) - 1]:
+                            print(new_data)
+
+                        else:
+                            print(new_data.center(20), end="")
+                input("\n\tEnter any key to continue..")
+                mf.clear()
+                customerMenu(uid)
+            if line_number == count and new_list == []:
+                print("\tSorry no data found.")
+                input("\n\tPrint any key to continue...")
+                customerMenu(uid)
+
+
+def show_transaction(uid):
+    print('\n')
+    print("\t\t\t\t\t\t\t\t\t\t----------------------")
+    print("\t\t\t\t\t\t\t\t\t\t||   TRANSACTION   ||")
+    print("\t\t\t\t\t\t\t\t\t\t----------------------\n\n")
+    with open('transaction.txt', 'r') as file:
+        file_data = file.readlines()
+        line_number = len(file_data)
+        count = 0
+        new_list = []
+        for data in file_data:
+            count = count + 1
+            list_data = data.split(',')
+            if uid in list_data:
+                new_list.append(list_data)
+            if count == line_number and new_list != []:
+                heading = ['TRANSACTION ID', 'LOAN ID', 'USER ID', 'LOAN TYPE', 'DATE AND TIME', 'PAYMENT',
                            'REMAINING AMOUNT']
                 for i in heading:
-                    if (i == heading[len(heading) - 1]):
+                    if i == heading[len(heading) - 1]:
                         print(i.center(20))
-                        print('\t-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------')
+                        print('---------------------------------------------------------------------------------------------------------------------------------------------')
                     else:
                         print(i.center(20), end="")
 
-                for data in list_value:
-                    if (data == list_value[len(list_value) - 1]):
-                        print(data)
-                        return
-                    else:
-                        print(data.center(20), end="")
-        print("Sorry, You haven't any loan details until now")
-        input("Press any key to go to Menu...")
-        customerMenu(uid)
+                for value in new_list:
+                    for new_data in value:
+                        if (new_data == value[len(value) - 1]):
+                            print(new_data)
 
-def show_transaction(uid):
-    with open('transaction.txt', 'r') as fp:
-        heading = ['TRANSACTION ID', 'LOAN ID', 'USER ID', 'LOAN TYPE', 'DATE AND TIME', 'PAYMENT', 'REMAINING AMOUNT']
+                        else:
+                            print(new_data.center(20), end="")
+                input("\n\tPress Enter to continue..")
+                mf.clear()
+                customerMenu(uid)
 
-        for i in heading:
-            if i == heading[len(heading) - 1]:
-                print(i.center(20))
-                print('---------------------------------------------------------------------------------------------------------------------------------------------')
-            else:
-                print(i.center(20), end="")
-
-        for data in fp:
-            list_data = data.split(',')
-            if uid in list_data:
-                for value in list_data:
-                    if(value == list_data[len(list_data)-1]):
-                        print(value)
-                    else:
-                        print(value.center(20), end="")
+            if line_number == count and new_list == []:
+                print("\n\tNo data found")
+                input("\tPress Enter to continue..")
+                mf.clear()
+                customerMenu(uid)

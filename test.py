@@ -45,3 +45,6 @@
 # testfunc()
 
 # import only system from os
+with open('transaction.txt', 'r') as file:
+    file_data = file.readlines()
+    print(len(file_data))

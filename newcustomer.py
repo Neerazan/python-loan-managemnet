@@ -57,7 +57,9 @@ def loanCalculator():
         rate = int(7)
         time = int(input("\tTime(in month): "))
         simple_interes = (principal * (time/12) * rate) / 100
-        print("\tinterest = ", simple_interes)
+        print("\tinterest: ", int(simple_interes))
+        print("\tTotal payable amount: ", int(principal+simple_interes))
+        print("\tMonthly EMI: ", (int(principal+simple_interes)/(time/12)))
         print('\n')
         input('\tPress any key to continue...')
         mf.clear()
@@ -68,7 +70,9 @@ def loanCalculator():
         rate = int(11)
         time = int(input("\tTime(in month): "))
         simple_interes = (principal * (time / 12) * rate) / 100
-        print("\tinterest = ", simple_interes)
+        print("\tinterest = ", int(simple_interes))
+        print("\tTotal payable amount: ", int(principal + simple_interes))
+        print("\tMonthly EMI: ", (int(principal + simple_interes) / (time/12)))
         print('\n')
         input('\tPress any key to continue...')
         mf.clear()
@@ -79,7 +83,9 @@ def loanCalculator():
         rate = int(11)
         time = int(input("\tTime(in month): "))
         simple_interes = (principal * (time / 12) * rate) / 100
-        print("\tinterest = ", simple_interes)
+        print("\tinterest = ", int(simple_interes))
+        print("\tTotal payable amount: ", int(principal + simple_interes))
+        print("\tMonthly EMI: ", (int(principal + simple_interes) / (time/12)))
         print('\n')
         input('\tPress any key to continue...')
         mf.clear()
@@ -90,7 +96,9 @@ def loanCalculator():
         rate = int(7)
         time = int(input("\tTime(in month): "))
         simple_interes = (principal * (time / 12) * rate) / 100
-        print("\tinterest = ", simple_interes)
+        print("\tinterest = ", int(simple_interes))
+        print("\tTotal payable amount: ", int(principal + simple_interes))
+        print("\tMonthly EMI: ", (int(principal + simple_interes) / (time / 12)))
         print('\n')
         input('\tPress any key to continue...')
         mf.clear()

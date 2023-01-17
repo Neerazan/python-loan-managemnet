@@ -28,29 +28,67 @@ def customerDetails():
 
 
 def displaLoanRequest():
-    print("    .......................................Loan request........................................\n")
-    with open("loan_request.txt",'r') as fp:
-        heading = ['UID', 'LOAN TYPE', 'PERIOD', 'DATE', 'AMOUNT']
-        for i in heading:
-            if (i == heading[len(heading) - 1]):
-                print(i.center(20))
-            else:
-                print(i.center(20), end="")
-        print('\t-------------------------------------------------------------------------------------------')
-        for data_db in fp:
-            list_data = data_db.split(',')
-            for data in list_data:
-                if (data == list_data[len(list_data) - 1]):
-                    print(data.center(20))
+    print("\n")
+    print("\t-----------------------")
+    print("\t||   LOAN REQUESTS   ||")
+    print("\t-----------------------\n")
+    with open('loan_request.txt', 'r') as file:
+        file_data = file.readlines()
+        line_number = len(file_data)
+        count = 0
+        new_list = []
+        for data in file_data:
+            count = count + 1
+            list_data = data.split(',')
+            new_list.append(list_data)
+        if count == line_number and new_list != []:
+            heading = ['UID', 'LOAN TYPE', 'PERIOD', 'DATE', 'AMOUNT']
+            for i in heading:
+                if i == heading[len(heading) - 1]:
+                    print(i.center(20))
+                    print('    -------------------------------------------------------------------------------------------')
                 else:
-                    print(data.center(20), end="")
+                    print(i.center(20), end="")
+
+            for value in new_list:
+                for new_data in value:
+                    if (new_data == value[len(value) - 1]):
+                        print(new_data)
+
+                    else:
+                        print(new_data.center(20), end="")
+            input("\n\tPress Enter to continue..")
+            mf.clear()
+            mf.adminMenu()
+        if line_number == count and new_list == []:
+            print("\n\tNo data found")
+            input("\tPress Enter to continue..")
+            mf.clear()
+            mf.adminMenu()
+
+    # print("    .......................................Loan request........................................\n")
+    # with open("loan_request.txt",'r') as fp:
+    #     heading = ['UID', 'LOAN TYPE', 'PERIOD', 'DATE', 'AMOUNT']
+    #     for i in heading:
+    #         if (i == heading[len(heading) - 1]):
+    #             print(i.center(20))
+    #         else:
+    #             print(i.center(20), end="")
+    #     print('\t-------------------------------------------------------------------------------------------')
+    #     for data_db in fp:
+    #         list_data = data_db.split(',')
+    #         for data in list_data:
+    #             if (data == list_data[len(list_data) - 1]):
+    #                 print(data.center(20))
+    #             else:
+    #                 print(data.center(20), end="")
     acceptLoan()
 
 
 
 def acceptLoan():
-    print("\nApprove Loan using respective user ID\n")
-    cust_ID = input("Enter customer id: ")
+    print("\n\tApprove Loan using respective user ID\n")
+    cust_ID = input("\tEnter customer id: ")
     with open("loan_request.txt","r") as file:
         for value in file:
             ldata = value.split(',')
@@ -101,7 +139,7 @@ def generateLoanID():
 
 def calculateLoan(amount, loanType, Time):
     if(loanType == "EL" or loanType == "el"):
-        rate = 15
+        rate = 7
         simpleInterest = (int(amount) * (int(Time)/12) * rate)/100
         return int(simpleInterest)
     elif(loanType == "CL" or loanType == "cl"):
@@ -144,8 +182,12 @@ def displaLoan():
 
 
 def customer_transaction():
-    print('Search transaction using customer ID and loan type(EL,PL,CL,HL)')
-    uid = input('Enter user id or loan type: ')
+    print("\n")
+    print("\t-----------------------------")
+    print("\t||  CUSTOMER TRANSACTIONS  ||")
+    print("\t-----------------------------\n")
+    print('\tSearch transaction using customer ID and loan type(EL,PL,CL,HL)')
+    uid = input('\n\tEnter user id or loan type: ')
     with open('transaction.txt', 'r') as file:
         file_data = file.readlines()
         line_number = len(file_data)
@@ -181,15 +223,26 @@ def customer_transaction():
                         list_data1 = data1.split(',')
                         loan_type = ['EL', 'HL', 'PL', 'CL']
                         if uid in list_data1 or uid in loan_type:
-                            print("No transaction")
-                            input("press any key to continue.....")
+                            print("\n\tNo transaction")
+                            input("\n\tpress any key to continue.....")
+                            mf.clear()
                             return mf.adminMenu()
-                    print("wrong input")
+                    print("\n\twrong input\n")
+                    input("\tPress any key to continue..")
+                    mf.clear()
+                    return mf.adminMenu()
 
 
 def show_all_transaction():
     with open('transaction.txt', 'r') as file:
         file_data = file.readlines()
+        if len(file_data) == 0:
+            print("\n\tNO TRANSACTION YET")
+            print("\n")
+            input("\tPress any key to continue....")
+            mf.clear()
+            mf.adminMenu()
+            return
         line_number = len(file_data)
         count = 0
         new_list = []
@@ -217,6 +270,7 @@ def show_all_transaction():
             if count == line_number and new_list == [ ]:
                 print("No transaction yet")
     input("press any key to continue......")
+    mf.clear()
     mf.adminMenu()
 if __name__ == '__main__':
     customerDetails()
