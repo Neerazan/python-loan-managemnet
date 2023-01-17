@@ -1,31 +1,42 @@
 import main_file as mf
-# import newcustomer as ns
 
 def customerDetails():
-    with open("signup.txt","r") as fp:
-        heading = ['UID','NAME','EMAIL','CONTACT','ADDRESS','GENDER','DOB']
-        for i in heading:
-            if(i == heading[len(heading)-1]):
-                print(i.ljust(20))
-            # elif(i == heading[2]):
-            #     print(i.ljust(30), end="")
-            else:
-                print(i.ljust(20), end="")
-        print("----------------------------------------------------------------------------------------------------------------------------")
-        while True:
-            data_db = fp.readline()
-            if(data_db == ''):
-                break
-            else:
-                data_list = data_db.split(',')
-                for value in data_list:
-                    # print(value.ljust(20),end='')
-                    if(value == data_list[len(data_list) - 1] or value == data_list[len(data_list) - 2]):
-                        print("")
-
+    with open('signup.txt', 'r') as file:
+        file_data = file.readlines()
+        if len(file_data) == 0:
+            print("\n\tNO CUSTOMERS YET")
+            print("\n")
+            input("\tPress any key to continue....")
+            mf.clear()
+            mf.adminMenu()
+            return
+        line_number = len(file_data)
+        count = 0
+        new_list = []
+        for data in file_data:
+            count = count + 1
+            list_data = data.split(',')
+            new_list.append(list_data)
+            if count == line_number and new_list != []:
+                heading = ['UID','NAME','EMAIL','CONTACT','ADDRESS','GENDER','DOB']
+                for i in heading:
+                    if i == heading[len(heading) - 1]:
+                        print(i.center(20))
+                        print("    ----------------------------------------------------------------------------------------------------------------------------------")
                     else:
-                        print(value.ljust(20), end="")
+                        print(i.center(20), end="")
 
+                for value in new_list:
+                    for new_data in value:
+                        if new_data == value[len(value) - 1] or new_data == value[len(value)-2]:
+                            print(" ")
+                        else:
+                            print(new_data.center(20), end="")
+            if count == line_number and new_list == [ ]:
+                print("\tNo transaction yet")
+    input("\tpress any key to continue......")
+    mf.clear()
+    mf.adminMenu()
 
 def displaLoanRequest():
     print("\n")
@@ -65,23 +76,6 @@ def displaLoanRequest():
             input("\tPress Enter to continue..")
             mf.clear()
             mf.adminMenu()
-
-    # print("    .......................................Loan request........................................\n")
-    # with open("loan_request.txt",'r') as fp:
-    #     heading = ['UID', 'LOAN TYPE', 'PERIOD', 'DATE', 'AMOUNT']
-    #     for i in heading:
-    #         if (i == heading[len(heading) - 1]):
-    #             print(i.center(20))
-    #         else:
-    #             print(i.center(20), end="")
-    #     print('\t-------------------------------------------------------------------------------------------')
-    #     for data_db in fp:
-    #         list_data = data_db.split(',')
-    #         for data in list_data:
-    #             if (data == list_data[len(list_data) - 1]):
-    #                 print(data.center(20))
-    #             else:
-    #                 print(data.center(20), end="")
     acceptLoan()
 
 
@@ -160,23 +154,23 @@ def calculateLoan(amount, loanType, Time):
 
 
 #display loan details
-def displaLoan():
-    print("    ......................................................................Loan Details.......................................................................\n")
-    with open("loan.txt",'r') as fp:
-        heading = ['LOAN ID', 'USER ID', 'LOAN TYPE', 'PERIOD', 'DATE', 'AMOUNT', 'TOTAL AMOUNT', 'MONTLY EMI', 'REMAINING AMOUNT']
-        for i in heading:
-            if (i == heading[len(heading) - 1]):
-                print(i.center(20))
-            else:
-                print(i.center(20), end="")
-        print('\t---------------------------------------------------------------------------------------------------------------------------------------------------------')
-        for data_db in fp:
-            list_data = data_db.split(',')
-            for data in list_data:
-                if (data == list_data[len(list_data) - 1]):
-                    print(data.center(20))
-                else:
-                    print(data.center(20), end="")
+# def displaLoan():
+#     print("    ......................................................................Loan Details.......................................................................\n")
+#     with open("loan.txt",'r') as fp:
+#         heading = ['LOAN ID', 'USER ID', 'LOAN TYPE', 'PERIOD', 'DATE', 'AMOUNT', 'TOTAL AMOUNT', 'MONTLY EMI', 'REMAINING AMOUNT']
+#         for i in heading:
+#             if (i == heading[len(heading) - 1]):
+#                 print(i.center(20))
+#             else:
+#                 print(i.center(20), end="")
+#         print('\t---------------------------------------------------------------------------------------------------------------------------------------------------------')
+#         for data_db in fp:
+#             list_data = data_db.split(',')
+#             for data in list_data:
+#                 if (data == list_data[len(list_data) - 1]):
+#                     print(data.center(20))
+#                 else:
+#                     print(data.center(20), end="")
 
 
 
