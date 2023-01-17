@@ -192,6 +192,31 @@ def show_all_transaction():
         file_data = file.readlines()
         line_number = len(file_data)
         count = 0
-        new_list
+        new_list = []
+        for data in file_data:
+            count = count + 1
+            list_data = data.split(',')
+            new_list.append(list_data)
+            if count == line_number and new_list != []:
+                heading = ['TRANSACTION ID', 'LOAN ID', 'USER ID', 'LOAN TYPE', 'DATE AND TIME', 'PAYMENT',
+                           'REMAINING AMOUNT']
+                for i in heading:
+                    if i == heading[len(heading) - 1]:
+                        print(i.center(20))
+                        print(
+                            '---------------------------------------------------------------------------------------------------------------------------------------------')
+                    else:
+                        print(i.center(20), end="")
+
+                for value in new_list:
+                    for new_data in value:
+                        if new_data == value[len(value) - 1]:
+                            print(new_data)
+                        else:
+                            print(new_data.center(20), end="")
+            if count == line_number and new_list == [ ]:
+                print("No transaction yet")
+    input("press any key to continue......")
+    mf.adminMenu()
 if __name__ == '__main__':
     customerDetails()

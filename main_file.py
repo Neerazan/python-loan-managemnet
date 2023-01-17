@@ -1,12 +1,20 @@
 import admin as ad
 import newcustomer as ns
 import customer as cu
+from os import system, name
+# from time import sleep
 def MainMenu():
-    print("1. Admin Login\n")
-    print("2. Customer Login\n")
-    print("3. New Customer Menu\n")
+    print('\n')
+    print('-------------------------------------------------')
+    print("|| MALAYSIA BANK ONLINE LOAN MANAGEMENT SYSTEM ||")
+    print('-------------------------------------------------')
+    print('\n')
+    print("\t1. Admin Login\n")
+    print("\t2. Customer Login\n")
+    print("\t3. New Customer Menu\n")
 
     choise = int(input("Enter your choise: "))
+    clear()
     if (choise == 1):
         adminLogin()
     elif (choise == 2):
@@ -24,11 +32,19 @@ def MainMenu():
 def adminLogin():
     password_db = "admin@634"
     username_db = "admin"
-    Username = input("Username: ")
-    Password = input("Password: ")
+    clear()
+    print('\n')
+    print("\t-----------------")
+    print("\t|| ADMIN LOGIN ||")
+    print("\t-----------------")
+    print('\n')
+    Username = input("\tUsername: ")
+    Password = input("\tPassword: ")
 
     if(username_db == Username and password_db == Password):
-        print("Login Successful\n")
+        print("\n\tLogin Successful\n")
+        print("\tPress any key to continue...")
+        clear()
         adminMenu()
         pass
     else:
@@ -45,8 +61,8 @@ def customerLogin():
         for i in data:
             data_list = i.split(',')
             if (uid == data_list[0] and password == data_list[len(data_list) - 2]):
-                print("login successfully\n")
-                input("Press any key to cotinue.....\n")
+                print("\n\tlogin successfully\n")
+                input("Press any key to continue.....\n")
                 cu.customerMenu(uid)
                 return
         print("Wrong ID or Password! Try again..")
@@ -71,20 +87,23 @@ def idGenerator():
 
 
 def signUp():
-    name = input("Name: ")
-    email = input("\nEmail: ")
-    contact = input("\nContact: ")
-    address = input("\nAddress(Name of city only): ")
-    gender = input("\nGender(male/female): ")
-    dob = input("\nDate of Birth: ")
-    password_1 = input("\nPassword: ")
-    password_2 = input("\nRetype Password: ")
+    print('\n')
+    print("\t------------------------")
+    print("\t|| CREATE NEW ACCOUNT ||")
+    print("\t------------------------\n")
+    name = input("\tName: ")
+    email = input("\tEmail: ")
+    contact = input("\tContact: ")
+    address = input("\tAddress(Name of city only): ")
+    gender = input("\tGender(male/female): ")
+    dob = input("\tDate of Birth: ")
+    password_1 = input("\tPassword: ")
+    password_2 = input("\tRetype Password: ")
 
     if (password_1 == password_2):
         uid = idGenerator()
 
         user = [str(uid), name, email, contact, address, gender, dob, password_1]
-        print(user[len(user) - 1])
         with open("signup.txt", "a") as f:
             for item in user:
                 if(item == user[len(user)-1]):
@@ -93,23 +112,32 @@ def signUp():
                 else:
                     f.write(item + ',')
             print("\n")
-            print("Successfully Registered.....")
-            print(f"Your user id is {uid}, Please remember it.")
+            print("\tSuccessfully Registered.....")
+            print(f"\tYour user id is {uid}, Please remember it.")
+            input("\n\tpress any key to continue.....")
+            clear()
+            MainMenu()
 
     else:
-        print("Sorry, Please enter same password, Try agin!!:\n")
+        print("\tSorry, Please enter same password, Try again!!:\n")
         print("\n")
         signUp()
 
 
 
 def adminMenu():
-    print("1. Approve Loan")
-    print("2. All transaction")
-    print("3. Search Transaction")
-    print("5. Exit")
+    print("\n")
+    print("\t----------------")
+    print("\t|| ADMIN MENU ||")
+    print("\t----------------")
+    print("\n")
+    print("\t1. Approve Loan")
+    print("\t2. All transaction")
+    print("\t3. Search Transaction")
+    print("\t4. Exit\n")
 
-    choose = int(input("Choose option: "))
+    choose = int(input("\t3Choose option: "))
+    clear()
 
     if choose == 1:
         ad.displaLoanRequest()
@@ -122,6 +150,13 @@ def adminMenu():
     else:
         print("Wrong input! Try again..")
 
+def clear():
+
+    if name == 'nt':
+        _ = system('cls')
+
+    else:
+        _ = system('clear')
 
 
 if __name__ == '__main__':
