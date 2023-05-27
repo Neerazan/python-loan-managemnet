@@ -1,3 +1,5 @@
+#code for customers service
+
 import main_file as mf
 from datetime import datetime
 import admin as ad
@@ -86,6 +88,7 @@ def updateAmount(uid, payment):
                 updateMonth = int(list_value[3]) - 1
                 if (updateMonth == 0 or newTotalAmount == 0):
                     print("Congratulations, You have paid all the loan...")
+                    print(" ")
                     input("Press any key to continue.....")
                     del file[num - 1]
                     with open('sample.txt', 'w') as f:
